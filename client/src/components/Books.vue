@@ -123,6 +123,7 @@
 
 <script>
 import axios from 'axios';
+
 import Alert from './Alert.vue';
 
 export default {
@@ -149,7 +150,7 @@ export default {
   },
   methods: {
     getBooks() {
-      const path = 'http://localhost:5000/books';
+      const path = `${process.env.VUE_APP_BACKEND_URL}/books`;
       axios.get(path)
         .then((res) => {
           this.books = res.data.books;
@@ -160,7 +161,7 @@ export default {
         });
     },
     addBook(payload) {
-      const path = 'http://localhost:5000/books';
+      const path = `${process.env.VUE_APP_BACKEND_URL}/books`;
       axios.post(path, payload)
         .then(() => {
           this.getBooks();
@@ -216,7 +217,7 @@ export default {
       this.updateBook(payload, this.editForm.id);
     },
     updateBook(payload, bookID) {
-      const path = `http://localhost:5000/books/${bookID}`;
+      const path = `${process.env.VUE_APP_BACKEND_URL}/books/${bookID}`;
       axios.put(path, payload)
         .then(() => {
           this.getBooks();
@@ -236,7 +237,7 @@ export default {
       this.getBooks(); // why?
     },
     removeBook(bookID) {
-      const path = `http://localhost:5000/books/${bookID}`;
+      const path = `${process.env.VUE_APP_BACKEND_URL}/books/${bookID}`;
       axios.delete(path)
         .then(() => {
           this.getBooks();
